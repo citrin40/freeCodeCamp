@@ -1,9 +1,11 @@
 # freeCodeCamp
 Containing Code for FreeCodeCamp Projects
-01_RWD - Responsive Web Design Certification
+## Contents
+
+**01_RWD - Responsive Web Design Certification
 02_JADS - JavaScript Algorithms and Data Structures Certification
 03_FEL - Front End Libraries Certification
 04_DV - Data Visualization Certification
 05_AAM - Apis and Microservices Certification
-06_ISQA - Information Security and Quality Assurance Certification
+06_ISQA - Information Security and Quality Assurance Certification**
 
