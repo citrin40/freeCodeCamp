@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+body {
+    background-color: #99c199;
+    margin: auto;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    min-width: 320px;
+}
+
+.form-outer {
+    background-color: white;
+    margin: auto;
+    width: 75%;
+    max-width: 900px;
+    padding: 20px 10px;
+    margin-bottom: 10px;
+}
+
+
+div[class*="column"] {
+    display: inline-block;
+    width: 48%;
+
+}
+
+ul{
+    list-style-type: none;
+}
+
+.column-left{
+
+    text-align: right;
+    vertical-align: top;
+    padding: 5px;
+    margin-top: 10px;
+
+}
+
+.column-right{
+    text-align: left;
+}
+
+.field{
+    height: 20px;
+    font-family: 'Raleway', sans-serif;
+    padding: 5px;
+    margin: 10px;
+    width: 75%;
+    max-width: 280px;
+    border: 1px solid #c0c0c0;
+    border-radius: 3px;
+}
+
+#description{
+    margin: 1em 0;
+
+}
+
+.dropdown{
+    margin: 10px;
+    margin-top:15px;
+    padding: 5px;
+    height: 35px;
+    width: 175px;
+    border: 1px solid #c0c0c0;
+    border-radius: 3px;
+}
+
+.radios, .checkboxes{
+    margin: 10px;
+}
+input[type=radio], input[type=checkbox]{
+    margin: 10px;
+}
+textarea{
+    width: 75%;
+    max-width: 300px;
+    height: 60px;
+    margin: 10px;
+    padding: 5px;
+    border: 1px solid #c0c0c0;
+    border-radius: 3px;
+}
+
+#submit{
+    padding: 10px 20px;
+    background-color: #006400;
+    border: 1px solid #003100;
+    font-size: 20px;
+    font-family: Raleway, sans-serif;
+    font-weight: bold;
+    border-radius: 8px;
+    color: white;
+    box-shadow:
+            1px 0 #004b00, 0 1px #004b00,
+            2px 1px #004b00, 1px 2px #004b00,
+            3px 2px #004b00, 2px 3px #004b00;
+}
+
+@media screen and (max-width: 833px) {
+    .field{
+        width: 80%;
+    }
+    select{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .column-left {
+        width: 100%;
+        text-align: left;
+    }
+
+    .column-right {
+        width: 80%;
+        float: left;
+    }
+
+    .field {
+        width: 100%;
+    }
+
+    select {
+        width: 100%;
+    }
+}
+
+
+
