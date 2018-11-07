@@ -4,7 +4,7 @@ Containing Code for FreeCodeCamp Projects
 
 **01_RWD - Responsive Web Design Certification**
 
-**02_JADS - JavaScript Algorithms and Data Structures Certification
+**02_JADS - JavaScript Algorithms and Data Structures Certification**
 
 **03_FEL - Front End Libraries Certification**
 
