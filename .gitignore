@@ -1,0 +1,7 @@
+#gitignore file for FreeCodeCamp-Project
+
+node_modules
+
+#Exceptions
+!.gitignore
+
