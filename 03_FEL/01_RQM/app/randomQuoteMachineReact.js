@@ -1,5 +1,3 @@
-'use strict';
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8,37 +6,168 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var e = React.createElement;
+var App = function (_React$Component) {
+    _inherits(App, _React$Component);
 
-var LikeButton = function (_React$Component) {
-    _inherits(LikeButton, _React$Component);
+    function App() {
+        _classCallCheck(this, App);
 
-    function LikeButton(props) {
-        _classCallCheck(this, LikeButton);
-
-        var _this = _possibleConstructorReturn(this, (LikeButton.__proto__ || Object.getPrototypeOf(LikeButton)).call(this, props));
-
-        _this.state = { liked: false };
-        return _this;
+        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
     }
 
-    _createClass(LikeButton, [{
-        key: 'render',
+    _createClass(App, [{
+        key: "render",
         value: function render() {
-            var _this2 = this;
-
-            if (this.state.liked) {
-                return 'You liked this.';
-            }
-
-            return e('button', { onClick: function onClick() {
-                    return _this2.setState({ liked: true });
-                } }, 'Like');
+            return React.createElement(QuoteBox, null);
         }
     }]);
 
-    return LikeButton;
+    return App;
 }(React.Component);
 
+var QuoteBox = function (_React$Component2) {
+    _inherits(QuoteBox, _React$Component2);
+
+    function QuoteBox() {
+        _classCallCheck(this, QuoteBox);
+
+        return _possibleConstructorReturn(this, (QuoteBox.__proto__ || Object.getPrototypeOf(QuoteBox)).apply(this, arguments));
+    }
+
+    _createClass(QuoteBox, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                { id: "quote-box" },
+                React.createElement(QuoteText, null),
+                React.createElement(QuoteAuthor, null),
+                React.createElement(ButtonArea, null)
+            );
+        }
+    }]);
+
+    return QuoteBox;
+}(React.Component);
+
+var QuoteText = function (_React$Component3) {
+    _inherits(QuoteText, _React$Component3);
+
+    function QuoteText() {
+        _classCallCheck(this, QuoteText);
+
+        return _possibleConstructorReturn(this, (QuoteText.__proto__ || Object.getPrototypeOf(QuoteText)).apply(this, arguments));
+    }
+
+    _createClass(QuoteText, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                { id: "text" },
+                "This is example Quote."
+            );
+        }
+    }]);
+
+    return QuoteText;
+}(React.Component);
+
+var QuoteAuthor = function (_React$Component4) {
+    _inherits(QuoteAuthor, _React$Component4);
+
+    function QuoteAuthor() {
+        _classCallCheck(this, QuoteAuthor);
+
+        return _possibleConstructorReturn(this, (QuoteAuthor.__proto__ || Object.getPrototypeOf(QuoteAuthor)).apply(this, arguments));
+    }
+
+    _createClass(QuoteAuthor, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                { id: "author" },
+                "My Undies"
+            );
+        }
+    }]);
+
+    return QuoteAuthor;
+}(React.Component);
+
+var ButtonArea = function (_React$Component5) {
+    _inherits(ButtonArea, _React$Component5);
+
+    function ButtonArea() {
+        _classCallCheck(this, ButtonArea);
+
+        return _possibleConstructorReturn(this, (ButtonArea.__proto__ || Object.getPrototypeOf(ButtonArea)).apply(this, arguments));
+    }
+
+    _createClass(ButtonArea, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                { id: "button-area" },
+                React.createElement(ButtonTweet, null),
+                React.createElement(ButtonGenerate, null)
+            );
+        }
+    }]);
+
+    return ButtonArea;
+}(React.Component);
+
+var ButtonTweet = function (_React$Component6) {
+    _inherits(ButtonTweet, _React$Component6);
+
+    function ButtonTweet() {
+        _classCallCheck(this, ButtonTweet);
+
+        return _possibleConstructorReturn(this, (ButtonTweet.__proto__ || Object.getPrototypeOf(ButtonTweet)).apply(this, arguments));
+    }
+
+    _createClass(ButtonTweet, [{
+        key: "render",
+        value: function render() {
+            return React.createElement("img", { src: "../../../media/03_FEL/01_RQM/twitter.png", alt: "Twitter Button", id: "tweet-quote" });
+        }
+    }]);
+
+    return ButtonTweet;
+}(React.Component);
+
+var ButtonGenerate = function (_React$Component7) {
+    _inherits(ButtonGenerate, _React$Component7);
+
+    function ButtonGenerate() {
+        _classCallCheck(this, ButtonGenerate);
+
+        return _possibleConstructorReturn(this, (ButtonGenerate.__proto__ || Object.getPrototypeOf(ButtonGenerate)).apply(this, arguments));
+    }
+
+    _createClass(ButtonGenerate, [{
+        key: "render",
+        value: function render() {
+            return React.createElement("img", { src: "../../../media/03_FEL/01_RQM/generate_small.png", alt: "Twitter Button", id: "new-quote" });
+        }
+    }]);
+
+    return ButtonGenerate;
+}(React.Component);
+
+var QUOTES = [{
+    quote: "Quote 1",
+    author: "Author 1"
+}, {
+    quote: "Quote 2",
+    author: "Author 2"
+}, {
+    quote: "Quote 3",
+    author: "Author 3"
+}];
+
 var domContainer = document.getElementById('root');
-ReactDOM.render(e(LikeButton), domContainer);
+ReactDOM.render(React.createElement(App, null), domContainer);
