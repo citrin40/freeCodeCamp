@@ -40,8 +40,8 @@ var QuoteBox = function (_React$Component2) {
             return React.createElement(
                 "div",
                 { id: "quote-box" },
-                React.createElement(QuoteText, null),
                 React.createElement(QuoteAuthor, null),
+                React.createElement(QuoteText, null),
                 React.createElement(ButtonArea, null)
             );
         }
@@ -50,8 +50,27 @@ var QuoteBox = function (_React$Component2) {
     return QuoteBox;
 }(React.Component);
 
-var QuoteText = function (_React$Component3) {
-    _inherits(QuoteText, _React$Component3);
+var QuoteSign = function (_React$Component3) {
+    _inherits(QuoteSign, _React$Component3);
+
+    function QuoteSign() {
+        _classCallCheck(this, QuoteSign);
+
+        return _possibleConstructorReturn(this, (QuoteSign.__proto__ || Object.getPrototypeOf(QuoteSign)).apply(this, arguments));
+    }
+
+    _createClass(QuoteSign, [{
+        key: "render",
+        value: function render() {
+            return React.createElement("img", { src: this.props.source, alt: "Twitter Button", id: this.props.direction });
+        }
+    }]);
+
+    return QuoteSign;
+}(React.Component);
+
+var QuoteText = function (_React$Component4) {
+    _inherits(QuoteText, _React$Component4);
 
     function QuoteText() {
         _classCallCheck(this, QuoteText);
@@ -62,10 +81,14 @@ var QuoteText = function (_React$Component3) {
     _createClass(QuoteText, [{
         key: "render",
         value: function render() {
+            var sourceLeft = "../../../media/03_FEL/01_RQM/quote_32x32_left.png";
+            var sourceRight = "../../../media/03_FEL/01_RQM/quote_32x32_right.png";
             return React.createElement(
                 "div",
                 { id: "text" },
-                "This is example Quote."
+                React.createElement(QuoteSign, { source: sourceLeft, direction: "quote-left" }),
+                "You know you're in love when you can't fall asleep because reality is finally better than your dreams You know you're in love when you can't fall asleep because reality is finally better than your dreams",
+                React.createElement(QuoteSign, { source: sourceRight, direction: "quote-right" })
             );
         }
     }]);
@@ -73,8 +96,8 @@ var QuoteText = function (_React$Component3) {
     return QuoteText;
 }(React.Component);
 
-var QuoteAuthor = function (_React$Component4) {
-    _inherits(QuoteAuthor, _React$Component4);
+var QuoteAuthor = function (_React$Component5) {
+    _inherits(QuoteAuthor, _React$Component5);
 
     function QuoteAuthor() {
         _classCallCheck(this, QuoteAuthor);
@@ -88,7 +111,7 @@ var QuoteAuthor = function (_React$Component4) {
             return React.createElement(
                 "div",
                 { id: "author" },
-                "My Undies"
+                "My Undies is a long author"
             );
         }
     }]);
@@ -96,8 +119,8 @@ var QuoteAuthor = function (_React$Component4) {
     return QuoteAuthor;
 }(React.Component);
 
-var ButtonArea = function (_React$Component5) {
-    _inherits(ButtonArea, _React$Component5);
+var ButtonArea = function (_React$Component6) {
+    _inherits(ButtonArea, _React$Component6);
 
     function ButtonArea() {
         _classCallCheck(this, ButtonArea);
@@ -120,8 +143,8 @@ var ButtonArea = function (_React$Component5) {
     return ButtonArea;
 }(React.Component);
 
-var ButtonTweet = function (_React$Component6) {
-    _inherits(ButtonTweet, _React$Component6);
+var ButtonTweet = function (_React$Component7) {
+    _inherits(ButtonTweet, _React$Component7);
 
     function ButtonTweet() {
         _classCallCheck(this, ButtonTweet);
@@ -132,15 +155,19 @@ var ButtonTweet = function (_React$Component6) {
     _createClass(ButtonTweet, [{
         key: "render",
         value: function render() {
-            return React.createElement("img", { src: "../../../media/03_FEL/01_RQM/twitter.png", alt: "Twitter Button", id: "tweet-quote" });
+            return React.createElement(
+                "a",
+                { href: "twitter.com/intent/tweet" },
+                React.createElement("img", { src: "../../../media/03_FEL/01_RQM/twitter-white.png", alt: "Twitter Button", id: "tweet-quote" })
+            );
         }
     }]);
 
     return ButtonTweet;
 }(React.Component);
 
-var ButtonGenerate = function (_React$Component7) {
-    _inherits(ButtonGenerate, _React$Component7);
+var ButtonGenerate = function (_React$Component8) {
+    _inherits(ButtonGenerate, _React$Component8);
 
     function ButtonGenerate() {
         _classCallCheck(this, ButtonGenerate);
@@ -151,7 +178,11 @@ var ButtonGenerate = function (_React$Component7) {
     _createClass(ButtonGenerate, [{
         key: "render",
         value: function render() {
-            return React.createElement("img", { src: "../../../media/03_FEL/01_RQM/generate_small.png", alt: "Twitter Button", id: "new-quote" });
+            return React.createElement(
+                "a",
+                { href: "#" },
+                React.createElement("img", { src: "../../../media/03_FEL/01_RQM/generate-white.png", alt: "New Quote Button", id: "new-quote" })
+            );
         }
     }]);
 

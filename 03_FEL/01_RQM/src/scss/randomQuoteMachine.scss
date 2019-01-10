@@ -1,0 +1,74 @@
+$circleDiameter: 75vh;
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: rgb(53, 59, 51);
+  background: linear-gradient(45deg, rgba(53, 59, 51, 1) 0%, rgba(94, 168, 81, 1) 47%, rgba(180, 223, 181, 1) 100%);
+  margin: auto;
+
+}
+
+#root {
+  //display: flex;
+  //justify-content: center;
+  //align-items: center;
+  padding-top: calc((100vh - 75vh) / 2);
+}
+
+#quote-box, #text, #author, #button-area {
+  width: $circleDiameter;
+  text-align: center;
+  font-family: Thasadith, sans-serif;
+
+  color: white;
+  font-weight: 400;
+}
+
+#quote-box {
+  margin: auto;
+  height: $circleDiameter;
+  background-color: rgba(20, 20, 20, 0.3);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+img[id*=quote]{
+  transform: translate(0, 5px);
+}
+
+
+#quote-right{
+
+}
+
+#text {
+  display: block;
+  padding: 1vh 5vh;
+  font-size: 35px;
+}
+
+#author {
+  font-style: italic;
+  padding: 3vh 15vh 0;
+  font-size: 30px;
+}
+
+#button-area{
+  padding: 0 10vh 3vh;
+  display: flex;
+  justify-content: center
+}
+
+
+a < img {
+  margin: 2vh 5vh;
+  box-sizing: content-box;
+}
+
+
