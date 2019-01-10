@@ -8,7 +8,10 @@ body {
   background: rgb(53, 59, 51);
   background: linear-gradient(45deg, rgba(53, 59, 51, 1) 0%, rgba(94, 168, 81, 1) 47%, rgba(180, 223, 181, 1) 100%);
   margin: auto;
-
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #root {
@@ -38,17 +41,18 @@ body {
   flex-wrap: wrap;
 }
 
-img[id*=quote]{
+img[id*=quote] {
   transform: translate(0, 5px);
 }
 
 
-#quote-right{
+#quote-right {
 
 }
 
 #text {
   display: block;
+  max-height: calc(#{$circleDiameter} - 30vh);
   padding: 1vh 5vh;
   font-size: 35px;
 }
@@ -59,16 +63,44 @@ img[id*=quote]{
   font-size: 30px;
 }
 
-#button-area{
+#button-area {
   padding: 0 10vh 3vh;
   display: flex;
-  justify-content: center
+  justify-content: center;
+
 }
 
 
-a < img {
+.transform {
+  animation: spin 0.5s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+a {
+  justify-content: center;
   margin: 2vh 5vh;
   box-sizing: content-box;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+
+}
+
+@media screen and (max-width: 1368px) {
+  #author{
+    font-size: 20px;
+
+  }
+
+  #text {
+    font-size: 25px;
+  }
 }
 
 

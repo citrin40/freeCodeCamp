@@ -16,7 +16,7 @@ var App = function (_React$Component) {
     }
 
     _createClass(App, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(QuoteBox, null);
         }
@@ -28,21 +28,75 @@ var App = function (_React$Component) {
 var QuoteBox = function (_React$Component2) {
     _inherits(QuoteBox, _React$Component2);
 
-    function QuoteBox() {
+    function QuoteBox(props) {
         _classCallCheck(this, QuoteBox);
 
-        return _possibleConstructorReturn(this, (QuoteBox.__proto__ || Object.getPrototypeOf(QuoteBox)).apply(this, arguments));
+        var _this2 = _possibleConstructorReturn(this, (QuoteBox.__proto__ || Object.getPrototypeOf(QuoteBox)).call(this, props));
+
+        _this2.state = {
+            author: '',
+            text: ''
+        };
+        _this2.getQuote = _this2.getQuote.bind(_this2);
+        _this2.setState = _this2.setState.bind(_this2);
+        _this2.componentDidMount = _this2.componentDidMount.bind(_this2);
+        return _this2;
     }
 
     _createClass(QuoteBox, [{
-        key: "render",
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.getQuote();
+        }
+    }, {
+        key: 'getQuote',
+        value: function getQuote() {
+
+            document.getElementById('new-quote').className = 'transform';
+
+            var quoteId = Math.floor(Math.random() * 60000);
+            var request = new XMLHttpRequest();
+            var text = this.state.text;
+            var author = this.state.author;
+
+            request.open('GET', 'https://favqs.com/api/quotes/' + quoteId, false);
+
+            request.setRequestHeader('Content-Type', 'application/json');
+            request.setRequestHeader('Authorization', 'Token token="2810108305cd08a07de3247a01b854ca"');
+
+            request.onload = function () {
+                if (request.status === 200) {
+                    var data = JSON.parse(this.response);
+                    text = data.body;
+                    author = data.author;
+                } else {
+                    console.log(request.status);
+                }
+            };
+            request.send();
+
+            if (request.status > 200) {
+                this.getQuote();
+            }
+
+            this.setState({
+                author: author,
+                text: text
+            });
+
+            setTimeout(function () {
+                document.getElementById('new-quote').className = '';
+            }, 500);
+        }
+    }, {
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
-                { id: "quote-box" },
-                React.createElement(QuoteAuthor, null),
-                React.createElement(QuoteText, null),
-                React.createElement(ButtonArea, null)
+                'div',
+                { id: 'quote-box' },
+                React.createElement(QuoteAuthor, { author: this.state.author }),
+                React.createElement(QuoteText, { text: this.state.text }),
+                React.createElement(ButtonArea, { getQuote: this.getQuote })
             );
         }
     }]);
@@ -60,9 +114,9 @@ var QuoteSign = function (_React$Component3) {
     }
 
     _createClass(QuoteSign, [{
-        key: "render",
+        key: 'render',
         value: function render() {
-            return React.createElement("img", { src: this.props.source, alt: "Twitter Button", id: this.props.direction });
+            return React.createElement('img', { src: this.props.source, alt: 'Twitter Button', id: this.props.direction });
         }
     }]);
 
@@ -79,16 +133,16 @@ var QuoteText = function (_React$Component4) {
     }
 
     _createClass(QuoteText, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             var sourceLeft = "../../../media/03_FEL/01_RQM/quote_32x32_left.png";
             var sourceRight = "../../../media/03_FEL/01_RQM/quote_32x32_right.png";
             return React.createElement(
-                "div",
-                { id: "text" },
-                React.createElement(QuoteSign, { source: sourceLeft, direction: "quote-left" }),
-                "You know you're in love when you can't fall asleep because reality is finally better than your dreams You know you're in love when you can't fall asleep because reality is finally better than your dreams",
-                React.createElement(QuoteSign, { source: sourceRight, direction: "quote-right" })
+                'div',
+                { id: 'text' },
+                React.createElement(QuoteSign, { source: sourceLeft, direction: 'quote-left' }),
+                this.props.text,
+                React.createElement(QuoteSign, { source: sourceRight, direction: 'quote-right' })
             );
         }
     }]);
@@ -106,12 +160,12 @@ var QuoteAuthor = function (_React$Component5) {
     }
 
     _createClass(QuoteAuthor, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
-                { id: "author" },
-                "My Undies is a long author"
+                'div',
+                { id: 'author' },
+                this.props.author
             );
         }
     }]);
@@ -122,20 +176,28 @@ var QuoteAuthor = function (_React$Component5) {
 var ButtonArea = function (_React$Component6) {
     _inherits(ButtonArea, _React$Component6);
 
-    function ButtonArea() {
+    function ButtonArea(props) {
         _classCallCheck(this, ButtonArea);
 
-        return _possibleConstructorReturn(this, (ButtonArea.__proto__ || Object.getPrototypeOf(ButtonArea)).apply(this, arguments));
+        var _this6 = _possibleConstructorReturn(this, (ButtonArea.__proto__ || Object.getPrototypeOf(ButtonArea)).call(this, props));
+
+        _this6.getQuote = _this6.getQuote.bind(_this6);
+        return _this6;
     }
 
     _createClass(ButtonArea, [{
-        key: "render",
+        key: 'getQuote',
+        value: function getQuote() {
+            this.props.getQuote();
+        }
+    }, {
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
-                { id: "button-area" },
+                'div',
+                { id: 'button-area' },
                 React.createElement(ButtonTweet, null),
-                React.createElement(ButtonGenerate, null)
+                React.createElement(ButtonGenerate, { getQuote: this.props.getQuote })
             );
         }
     }]);
@@ -153,12 +215,12 @@ var ButtonTweet = function (_React$Component7) {
     }
 
     _createClass(ButtonTweet, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "a",
-                { href: "twitter.com/intent/tweet" },
-                React.createElement("img", { src: "../../../media/03_FEL/01_RQM/twitter-white.png", alt: "Twitter Button", id: "tweet-quote" })
+                'a',
+                { href: 'https://twitter.com/intent/tweet' },
+                React.createElement('img', { src: '../../../media/03_FEL/01_RQM/twitter-white.png', alt: 'Twitter Button', id: 'tweet-quote' })
             );
         }
     }]);
@@ -169,36 +231,33 @@ var ButtonTweet = function (_React$Component7) {
 var ButtonGenerate = function (_React$Component8) {
     _inherits(ButtonGenerate, _React$Component8);
 
-    function ButtonGenerate() {
+    function ButtonGenerate(props) {
         _classCallCheck(this, ButtonGenerate);
 
-        return _possibleConstructorReturn(this, (ButtonGenerate.__proto__ || Object.getPrototypeOf(ButtonGenerate)).apply(this, arguments));
+        var _this8 = _possibleConstructorReturn(this, (ButtonGenerate.__proto__ || Object.getPrototypeOf(ButtonGenerate)).call(this, props));
+
+        _this8.getQuote = _this8.getQuote.bind(_this8);
+        return _this8;
     }
 
     _createClass(ButtonGenerate, [{
-        key: "render",
+        key: 'getQuote',
+        value: function getQuote() {
+            this.props.getQuote();
+        }
+    }, {
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "a",
-                { href: "#" },
-                React.createElement("img", { src: "../../../media/03_FEL/01_RQM/generate-white.png", alt: "New Quote Button", id: "new-quote" })
+                'a',
+                { href: '#', onClick: this.getQuote },
+                React.createElement('img', { src: '../../../media/03_FEL/01_RQM/generate-white.png', alt: 'New Quote Button', id: 'new-quote' })
             );
         }
     }]);
 
     return ButtonGenerate;
 }(React.Component);
-
-var QUOTES = [{
-    quote: "Quote 1",
-    author: "Author 1"
-}, {
-    quote: "Quote 2",
-    author: "Author 2"
-}, {
-    quote: "Quote 3",
-    author: "Author 3"
-}];
 
 var domContainer = document.getElementById('root');
 ReactDOM.render(React.createElement(App, null), domContainer);

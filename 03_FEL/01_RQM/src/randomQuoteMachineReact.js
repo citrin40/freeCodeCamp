@@ -7,14 +7,72 @@ class App extends React.Component {
 }
 
 class QuoteBox extends React.Component {
+    constructor(props){
+        super(props);
+        this.state ={
+            author: '',
+            text: ''
+        };
+        this.getQuote = this.getQuote.bind(this);
+        this.setState = this.setState.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+    }
+
+    componentDidMount() {
+        this.getQuote();
+    }
+
+    getQuote() {
+
+        document.getElementById('new-quote').className = 'transform';
+
+        var quoteId = Math.floor(Math.random()*60000);
+        var request = new XMLHttpRequest();
+        let text = this.state.text;
+        let author = this.state.author;
+
+
+        request.open('GET', 'https://favqs.com/api/quotes/' + quoteId, false);
+
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.setRequestHeader('Authorization', 'Token token="2810108305cd08a07de3247a01b854ca"');
+
+
+        request.onload = function() {
+            if(request.status === 200){
+                var data = JSON.parse(this.response);
+                text = data.body;
+                author = data.author;
+            } else {
+                console.log(request.status);
+            }
+        };
+        request.send();
+
+        if(request.status > 200) {
+            this.getQuote();
+        }
+
+        this.setState({
+            author: author,
+            text: text
+        });
+
+        setTimeout(() => {
+            document.getElementById('new-quote').className = '';
+        },500);
+
+    }
+
+
     render() {
         return (
             <div id="quote-box">
-                <QuoteAuthor/>
+                <QuoteAuthor author={this.state.author}/>
 
-                <QuoteText/>
+                <QuoteText text={this.state.text}/>
 
-                <ButtonArea/>
+                <ButtonArea getQuote={this.getQuote}/>
             </div>
         );
     }
@@ -36,8 +94,7 @@ class QuoteText extends React.Component {
         return (
             <div id="text">
                 <QuoteSign source={sourceLeft} direction="quote-left"/>
-                You know you're in love when you can't fall asleep because reality is finally better than your dreams
-                You know you're in love when you can't fall asleep because reality is finally better than your dreams
+                {this.props.text}
                 <QuoteSign source={sourceRight} direction="quote-right"/>
             </div>
         )
@@ -48,18 +105,28 @@ class QuoteAuthor extends React.Component {
     render() {
         return (
             <div id="author">
-                My Undies is a long author
+                {this.props.author}
             </div>
         )
     }
 }
 
 class ButtonArea extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.getQuote = this.getQuote.bind(this);
+    }
+
+    getQuote(){
+        this.props.getQuote();
+    }
+
     render() {
         return(
             <div id="button-area">
                 <ButtonTweet/>
-                <ButtonGenerate/>
+                <ButtonGenerate getQuote={this.props.getQuote}/>
             </div>
         )
     }
@@ -68,35 +135,28 @@ class ButtonArea extends React.Component {
 class ButtonTweet extends React.Component {
     render() {
         return (
-            <a href="twitter.com/intent/tweet"><img src="../../../media/03_FEL/01_RQM/twitter-white.png" alt="Twitter Button" id="tweet-quote"/></a>
+            <a href="https://twitter.com/intent/tweet"><img src="../../../media/03_FEL/01_RQM/twitter-white.png" alt="Twitter Button" id="tweet-quote"/></a>
         )
     }
 }
 
 class ButtonGenerate extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.getQuote = this.getQuote.bind(this);
+    }
+
+    getQuote() {
+        this.props.getQuote();
+    }
+
     render() {
         return (
-            <a href="#"><img src="../../../media/03_FEL/01_RQM/generate-white.png" alt="New Quote Button" id="new-quote"/></a>
+            <a href="#" onClick={this.getQuote} ><img src="../../../media/03_FEL/01_RQM/generate-white.png" alt="New Quote Button" id="new-quote"/></a>
         )
     }
 }
-
-const QUOTES = [
-    {
-        quote: "Quote 1",
-        author: "Author 1"
-    },
-    {
-        quote: "Quote 2",
-        author: "Author 2"
-    },
-    {
-        quote: "Quote 3",
-        author: "Author 3"
-    },
-
-]
-
 
 const domContainer = document.getElementById('root');
 ReactDOM.render(<App/>, domContainer);
