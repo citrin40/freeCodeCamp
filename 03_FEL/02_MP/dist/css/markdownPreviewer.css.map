@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "markdownPreviewer.css",
+	"sources": [
+		"../../src/scss/markdownPreviewer.scss"
+	],
+	"names": [],
+	"mappings": ""
+}
