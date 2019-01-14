@@ -1,28 +1,87 @@
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var drumBox1 = [{
+    key: "Q",
+    keycode: 81,
+    audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3',
+    id: 'Heater-1'
+}, {
+    key: "W",
+    keycode: 87,
+    audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3',
+    id: 'Heater-2'
+}, {
+    key: "E",
+    keycode: 69,
+    audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3',
+    id: 'Heater-3'
+}, {
+    key: "A",
+    keycode: 65,
+    audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3',
+    id: 'Heater-4'
+}, {
+    key: "S",
+    keycode: 83,
+    audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3',
+    id: 'Clap'
+}, {
+    key: "D",
+    keycode: 68,
+    audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3',
+    id: 'Open-HH'
+}, {
+    key: "Z",
+    keycode: 90,
+    audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3',
+    id: 'Kick-n-Hat'
+}, {
+    key: "X",
+    keycode: 88,
+    audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3',
+    id: 'Kick'
+}, {
+    key: "C",
+    keycode: 67,
+    audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3',
+    id: 'Closed-HH'
+}];
+
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
 
-    function App() {
+    function App(props) {
         _classCallCheck(this, App);
 
-        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+        _this.playSound = _this.playSound.bind(_this);
+
+        return _this;
     }
 
     _createClass(App, [{
-        key: "render",
+        key: 'playSound',
+        value: function playSound(e) {
+
+            document.getElementById(e.target.value).play();
+        }
+    }, {
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
-                { id: "drum-machine" },
+                'div',
+                { id: 'drum-machine' },
                 React.createElement(Display, null),
-                React.createElement(DrumPad, null),
+                React.createElement(DrumPad, { playSound: this.playSound }),
                 React.createElement(Slider, null),
                 React.createElement(Toggle, null)
             );
@@ -42,12 +101,12 @@ var Display = function (_React$Component2) {
     }
 
     _createClass(Display, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
-                { id: "display" },
-                "Test Etwas l\xE4ngerer"
+                'div',
+                { id: 'display' },
+                'Test Etwas l\xE4ngerer'
             );
         }
     }]);
@@ -65,12 +124,36 @@ var DrumPad = function (_React$Component3) {
     }
 
     _createClass(DrumPad, [{
-        key: "render",
+        key: 'renderDrumButton',
+        value: function renderDrumButton(i) {
+            return React.createElement(DrumButton, {
+                playSound: this.props.playSound,
+                value: drumBox1[i].key,
+                source: drumBox1[i].audioSource,
+                accessKey: drumBox1[i].keycode,
+                key: i
+            });
+        }
+    }, {
+        key: 'render',
         value: function render() {
+            var _this4 = this;
+
+            var rows = 3,
+                cols = 3;
             return React.createElement(
-                "button",
-                { className: "drum-pad" },
-                "Q"
+                'div',
+                null,
+                [].concat(_toConsumableArray(new Array(rows))).map(function (x, rowIndex) {
+
+                    return React.createElement(
+                        'div',
+                        { className: 'row', key: rowIndex },
+                        [].concat(_toConsumableArray(new Array(cols))).map(function (y, colIndex) {
+                            return _this4.renderDrumButton(rowIndex * cols + colIndex);
+                        })
+                    );
+                })
             );
         }
     }]);
@@ -78,8 +161,40 @@ var DrumPad = function (_React$Component3) {
     return DrumPad;
 }(React.Component);
 
-var Slider = function (_React$Component4) {
-    _inherits(Slider, _React$Component4);
+var DrumButton = function (_React$Component4) {
+    _inherits(DrumButton, _React$Component4);
+
+    function DrumButton() {
+        _classCallCheck(this, DrumButton);
+
+        return _possibleConstructorReturn(this, (DrumButton.__proto__ || Object.getPrototypeOf(DrumButton)).apply(this, arguments));
+    }
+
+    _createClass(DrumButton, [{
+        key: 'render',
+        value: function render() {
+            var _this6 = this;
+
+            return React.createElement(
+                'button',
+                { className: 'drum-pad', onClick: function onClick(e) {
+                        return _this6.props.playSound(e);
+                    }, value: this.props.value },
+                this.props.value,
+                React.createElement(
+                    'audio',
+                    { className: 'clip', id: this.props.value, accessKey: this.props.accessKey },
+                    React.createElement('source', { src: this.props.source, type: 'audio/mpeg' })
+                )
+            );
+        }
+    }]);
+
+    return DrumButton;
+}(React.Component);
+
+var Slider = function (_React$Component5) {
+    _inherits(Slider, _React$Component5);
 
     function Slider() {
         _classCallCheck(this, Slider);
@@ -88,13 +203,13 @@ var Slider = function (_React$Component4) {
     }
 
     _createClass(Slider, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
-                { className: "container" },
-                React.createElement("input", { type: "range", min: "0", max: "100", className: "range", id: "range" }),
-                React.createElement("div", { id: "range-val" })
+                'div',
+                { className: 'container' },
+                React.createElement('input', { type: 'range', min: '0', max: '100', className: 'range', id: 'range' }),
+                React.createElement('div', { id: 'range-val' })
             );
         }
     }]);
@@ -102,8 +217,8 @@ var Slider = function (_React$Component4) {
     return Slider;
 }(React.Component);
 
-var Toggle = function (_React$Component5) {
-    _inherits(Toggle, _React$Component5);
+var Toggle = function (_React$Component6) {
+    _inherits(Toggle, _React$Component6);
 
     function Toggle() {
         _classCallCheck(this, Toggle);
@@ -112,17 +227,21 @@ var Toggle = function (_React$Component5) {
     }
 
     _createClass(Toggle, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
-                { className: "container" },
+                'div',
+                { className: 'container' },
                 React.createElement(
-                    "label",
-                    { className: "switch" },
-                    React.createElement("input", { type: "checkbox" }),
-                    React.createElement("span", { className: "slider round" }),
-                    "Toggle"
+                    'label',
+                    { className: 'switch' },
+                    React.createElement('input', { type: 'checkbox' }),
+                    React.createElement('span', { className: 'slider round' })
+                ),
+                React.createElement(
+                    'p',
+                    null,
+                    'Drums'
                 )
             );
         }

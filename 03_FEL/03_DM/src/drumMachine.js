@@ -1,9 +1,80 @@
+
+const drumBox1 = [
+    {
+        key: "Q",
+        keycode: 81,
+        audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3',
+        id: 'Heater-1'
+    },
+    {
+        key: "W",
+        keycode: 87,
+        audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3',
+        id: 'Heater-2'
+    },
+    {
+        key: "E",
+        keycode: 69,
+        audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3',
+        id: 'Heater-3'
+    },
+    {
+        key: "A",
+        keycode: 65,
+        audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3',
+        id: 'Heater-4'
+    },
+    {
+        key: "S",
+        keycode: 83,
+        audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3',
+        id: 'Clap'
+    },
+    {
+        key: "D",
+        keycode: 68,
+        audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3',
+        id: 'Open-HH'
+    },
+    {
+        key: "Z",
+        keycode: 90,
+        audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3',
+        id: 'Kick-n-Hat'
+    },
+    {
+        key: "X",
+        keycode: 88,
+        audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3',
+        id: 'Kick'
+    },
+    {
+        key: "C",
+        keycode: 67,
+        audioSource: 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3',
+        id: 'Closed-HH'
+    },
+];
+
 class App extends React.Component {
+    constructor(props){
+        super(props);
+
+        this.playSound = this.playSound.bind(this);
+
+    }
+
+    playSound(e){
+
+        document.getElementById(e.target.value).play();
+
+    }
+
     render() {
         return (
             <div id="drum-machine">
                 <Display/>
-                <DrumPad/>
+                <DrumPad playSound={this.playSound}/>
                 <Slider/>
                 <Toggle/>
             </div>
@@ -20,12 +91,48 @@ class Display extends React.Component {
 }
 
 class DrumPad extends React.Component {
+
+    renderDrumButton(i) {
+        return(
+            <DrumButton
+                playSound={this.props.playSound}
+                value={drumBox1[i].key}
+                source={drumBox1[i].audioSource}
+                accessKey={drumBox1[i].keycode}
+                key={i}
+                />
+        );
+    }
+
+    render() {
+        const rows = 3, cols = 3;
+        return (
+            <div>
+                {[...new Array(rows)].map((x, rowIndex) => {
+
+                    return(
+                    <div className="row" key={rowIndex}>
+
+                        {[...new Array(cols)].map((y, colIndex) => this.renderDrumButton(rowIndex * cols + colIndex))}
+                    </div>
+                    );
+                })
+                }
+            </div>
+        );
+    }
+}
+
+class DrumButton extends React.Component {
     render() {
         return (
-            <button className="drum-pad">Q
+            <button className="drum-pad" onClick={(e) => this.props.playSound(e)} value={this.props.value}>
+                {this.props.value}
+                <audio className="clip" id={this.props.value} accessKey={this.props.accessKey}>
+                    <source src={this.props.source}  type="audio/mpeg"/>
+                </audio>
             </button>
-
-        );
+        )
     }
 }
 
@@ -47,8 +154,8 @@ class Toggle extends React.Component {
                 <label className="switch">
                     <input type="checkbox"/>
                     <span className="slider round"></span>
-                    Toggle
                 </label>
+                <p>Drums</p>
             </div>
         );
     }
