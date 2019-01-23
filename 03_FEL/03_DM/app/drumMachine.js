@@ -71,7 +71,6 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: 'playSound',
         value: function playSound(e) {
-
             document.getElementById(e.target.value).play();
         }
     }, {
@@ -131,7 +130,6 @@ var DrumPad = function (_React$Component3) {
                 playSound: this.props.playSound,
                 value: drumBox1[i].key,
                 source: drumBox1[i].audioSource,
-                accessKey: drumBox1[i].keycode,
                 key: i
             });
         }
@@ -184,7 +182,7 @@ var DrumButton = function (_React$Component4) {
                 this.props.value,
                 React.createElement(
                     'audio',
-                    { className: 'clip', id: this.props.value, accessKey: this.props.accessKey },
+                    { className: 'clip', id: this.props.value },
                     React.createElement('source', { src: this.props.source, type: 'audio/mpeg' })
                 )
             );
@@ -252,3 +250,27 @@ var Toggle = function (_React$Component6) {
 }(React.Component);
 
 ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
+
+window.addEventListener("keydown", function (event) {
+    if (event.defaultPrevented) {
+        return;
+    }
+    var keyCodeExists = function keyCodeExists(el) {
+        return el.keycode == event.keyCode;
+    };
+
+    if (event.keyCode !== undefined && drumBox1.some(keyCodeExists)) {
+
+        var buttonJson = drumBox1.filter(function (el) {
+            if (el.keycode == event.keyCode) {
+                return el;
+            }
+        }).shift();
+
+        var button = document.getElementById(buttonJson.key).parentElement;
+
+        console.log(button);
+
+        button.click();
+    }
+});

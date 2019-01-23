@@ -65,9 +65,7 @@ class App extends React.Component {
     }
 
     playSound(e){
-
         document.getElementById(e.target.value).play();
-
     }
 
     render() {
@@ -99,7 +97,6 @@ class DrumPad extends React.Component {
                 playSound={this.props.playSound}
                 value={drumBox1[i].key}
                 source={drumBox1[i].audioSource}
-                accessKey={drumBox1[i].keycode}
                 key={i}
                 />
         );
@@ -127,9 +124,9 @@ class DrumPad extends React.Component {
 class DrumButton extends React.Component {
     render() {
         return (
-            <button className="drum-pad" onClick={(e) => this.props.playSound(e)} value={this.props.value}>
+            <button className="drum-pad" onClick={(e) => this.props.playSound(e)} value={this.props.value} >
                 {this.props.value}
-                <audio className="clip" id={this.props.value} accessKey={this.props.accessKey}>
+                <audio className="clip" id={this.props.value} >
                     <source src={this.props.source}  type="audio/mpeg"/>
                 </audio>
             </button>
@@ -164,3 +161,27 @@ class Toggle extends React.Component {
 
 ReactDOM.render(<App/>, document.getElementById('root'));
 
+
+window.addEventListener("keydown", function (event){
+    if(event.defaultPrevented){
+        return;
+    }
+    const keyCodeExists = (el) => {return (el.keycode == event.keyCode)};
+
+
+    if(event.keyCode !== undefined && drumBox1.some(keyCodeExists)){
+
+        let buttonJson = drumBox1.filter((el) => {
+            if(el.keycode == event.keyCode){
+                return el;
+            }
+        }).shift();
+
+        let button = document.getElementById(buttonJson.key).parentElement;
+
+        console.log(button);
+
+        button.click();
+
+    }
+});
