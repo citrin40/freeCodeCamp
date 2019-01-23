@@ -60,20 +60,40 @@ class App extends React.Component {
     constructor(props){
         super(props);
 
+        this.state = {
+            volume: 50,
+            displayText: 'Press any Button'
+
+        };
+
         this.playSound = this.playSound.bind(this);
+        this.changeVolume = this.changeVolume.bind(this);
 
     }
 
     playSound(e){
-        document.getElementById(e.target.value).play();
+        let audioElement = document.getElementById(e.target.value);
+        audioElement.volume = this.state.volume/100;
+        audioElement.play();
+
+        let displayText = drumBox1.filter((el) => {return (audioElement.id == el.key)}).shift().id;
+        this.setState({
+            displayText: displayText
+        });
+    }
+
+    changeVolume(e){
+        this.setState({
+            volume: e.target.value
+        })
     }
 
     render() {
         return (
             <div id="drum-machine">
-                <Display/>
+                <Display displayText={this.state.displayText}/>
                 <DrumPad playSound={this.playSound}/>
-                <Slider/>
+                <Slider value={this.state.volume} changeVolume={this.changeVolume}/>
                 <Toggle/>
             </div>
         )
@@ -83,7 +103,7 @@ class App extends React.Component {
 class Display extends React.Component {
     render() {
         return (
-            <div id="display">Test Etwas längerer</div>
+            <div id="display">{this.props.displayText}</div>
         );
     }
 }
@@ -138,8 +158,12 @@ class Slider extends React.Component {
     render() {
         return (
             <div className="container">
-                <input type="range" min="0" max="100" className="range" id="range"/>
-                <div id="range-val"></div>
+                <input
+                    type="range" min="0" max="100"
+                    className="range" id="range"
+                    value={this.props.value}
+                    onChange={(e) => this.props.changeVolume(e)}/>
+                <div id="range-val">Vol. {this.props.value}</div>
             </div>
         );
     }
@@ -179,9 +203,7 @@ window.addEventListener("keydown", function (event){
 
         let button = document.getElementById(buttonJson.key).parentElement;
 
-        console.log(button);
-
         button.click();
-
     }
 });
+

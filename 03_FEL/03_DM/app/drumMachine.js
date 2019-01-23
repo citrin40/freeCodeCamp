@@ -63,7 +63,14 @@ var App = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
+        _this.state = {
+            volume: 50,
+            displayText: 'Press any Button'
+
+        };
+
         _this.playSound = _this.playSound.bind(_this);
+        _this.changeVolume = _this.changeVolume.bind(_this);
 
         return _this;
     }
@@ -71,7 +78,23 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: 'playSound',
         value: function playSound(e) {
-            document.getElementById(e.target.value).play();
+            var audioElement = document.getElementById(e.target.value);
+            audioElement.volume = this.state.volume / 100;
+            audioElement.play();
+
+            var displayText = drumBox1.filter(function (el) {
+                return audioElement.id == el.key;
+            }).shift().id;
+            this.setState({
+                displayText: displayText
+            });
+        }
+    }, {
+        key: 'changeVolume',
+        value: function changeVolume(e) {
+            this.setState({
+                volume: e.target.value
+            });
         }
     }, {
         key: 'render',
@@ -79,9 +102,9 @@ var App = function (_React$Component) {
             return React.createElement(
                 'div',
                 { id: 'drum-machine' },
-                React.createElement(Display, null),
+                React.createElement(Display, { displayText: this.state.displayText }),
                 React.createElement(DrumPad, { playSound: this.playSound }),
-                React.createElement(Slider, null),
+                React.createElement(Slider, { value: this.state.volume, changeVolume: this.changeVolume }),
                 React.createElement(Toggle, null)
             );
         }
@@ -105,7 +128,7 @@ var Display = function (_React$Component2) {
             return React.createElement(
                 'div',
                 { id: 'display' },
-                'Test Etwas l\xE4ngerer'
+                this.props.displayText
             );
         }
     }]);
@@ -204,11 +227,24 @@ var Slider = function (_React$Component5) {
     _createClass(Slider, [{
         key: 'render',
         value: function render() {
+            var _this8 = this;
+
             return React.createElement(
                 'div',
                 { className: 'container' },
-                React.createElement('input', { type: 'range', min: '0', max: '100', className: 'range', id: 'range' }),
-                React.createElement('div', { id: 'range-val' })
+                React.createElement('input', {
+                    type: 'range', min: '0', max: '100',
+                    className: 'range', id: 'range',
+                    value: this.props.value,
+                    onChange: function onChange(e) {
+                        return _this8.props.changeVolume(e);
+                    } }),
+                React.createElement(
+                    'div',
+                    { id: 'range-val' },
+                    'Vol. ',
+                    this.props.value
+                )
             );
         }
     }]);
@@ -268,8 +304,6 @@ window.addEventListener("keydown", function (event) {
         }).shift();
 
         var button = document.getElementById(buttonJson.key).parentElement;
-
-        console.log(button);
 
         button.click();
     }

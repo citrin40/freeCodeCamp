@@ -68,6 +68,12 @@ body, html{
   border-radius: 50%;
 }
 
+#range-val{
+  font-size: 18px;
+  font-family: "Roboto Mono",monospace;
+  margin-top: 7px;
+}
+
 .container {
   width: 100%;
   margin: 15px auto;
@@ -101,6 +107,11 @@ body, html{
     1px 0 $btnShadow, 0 1px $btnShadow,
     2px 1px $btnShadow, 1px 2px $btnShadow;
   user-select: none;
+}
+
+.drum-pad:active{
+  background-color: $btnShadow;
+  color: white;
 }
 
 .slider {
