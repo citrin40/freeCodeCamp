@@ -94,7 +94,6 @@ class App extends React.Component {
                 <Display displayText={this.state.displayText}/>
                 <DrumPad playSound={this.playSound}/>
                 <Slider value={this.state.volume} changeVolume={this.changeVolume}/>
-                <Toggle/>
             </div>
         )
     }

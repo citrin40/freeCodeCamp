@@ -104,8 +104,7 @@ var App = function (_React$Component) {
                 { id: 'drum-machine' },
                 React.createElement(Display, { displayText: this.state.displayText }),
                 React.createElement(DrumPad, { playSound: this.playSound }),
-                React.createElement(Slider, { value: this.state.volume, changeVolume: this.changeVolume }),
-                React.createElement(Toggle, null)
+                React.createElement(Slider, { value: this.state.volume, changeVolume: this.changeVolume })
             );
         }
     }]);
