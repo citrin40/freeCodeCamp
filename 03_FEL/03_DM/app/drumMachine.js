@@ -127,6 +127,7 @@ var DrumPad = function (_React$Component3) {
         key: 'renderDrumButton',
         value: function renderDrumButton(i) {
             return React.createElement(DrumButton, {
+                className: 'drum-pad',
                 playSound: this.props.playSound,
                 value: drumBox1[i].key,
                 source: drumBox1[i].audioSource,

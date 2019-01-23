@@ -95,6 +95,7 @@ class DrumPad extends React.Component {
     renderDrumButton(i) {
         return(
             <DrumButton
+                className="drum-pad"
                 playSound={this.props.playSound}
                 value={drumBox1[i].key}
                 source={drumBox1[i].audioSource}
