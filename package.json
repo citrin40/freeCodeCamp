@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-task:scss-compile": "node-sass-chokidar --source-map true 03_FEL/02_MP/src/scss/ -o 03_FEL/02_MP/dist/css",
-    "build-task:autoprefixer": "postcss 03_FEL/02_MP/dist/css/*.css --use autoprefixer -d 03_FEL/02_MP/dist/css",
+    "build-task:scss-compile": "node-sass-chokidar --source-map true 03_FEL/04_JC/src/scss/ -o 03_FEL/04_JC/dist/css",
+    "build-task:autoprefixer": "postcss 03_FEL/04_JC/dist/css/*.css --use autoprefixer -d 03_FEL/04_JC/dist/css",
     "sass:build": "npm-run-all -p build-task:*",
-    "sass:watch": "chokidar '03_FEL/02_MP/src/scss/**/*.scss' -c 'npm run sass:build'",
+    "sass:watch": "chokidar '03_FEL/04_JC/src/scss/**/*.scss' -c 'npm run sass:build'",
     "dev": "npm-run-all -p sass:*"
   },
   "repository": {
