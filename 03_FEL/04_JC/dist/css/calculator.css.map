@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "calculator.css",
+	"sources": [
+		"../../src/scss/calculator.scss"
+	],
+	"names": [],
+	"mappings": ""
+}

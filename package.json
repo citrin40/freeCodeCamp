@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/citrin92/freeCodeCamp#readme",
   "dependencies": {
-    "autoprefixer": "^9.4.4",
+    "autoprefixer": "^9.4.7",
     "babel-cli": "^6.26.0",
     "babel-preset-react-app": "^3.1.2",
     "chokidar-cli": "^1.2.1",
