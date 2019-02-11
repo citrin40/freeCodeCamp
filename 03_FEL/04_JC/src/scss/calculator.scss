@@ -2,14 +2,15 @@ $lightGrey: #d4d4d2;
 $black: #1c1c1c;
 $darkGrey: #505050;
 $orange: #ff9500;
-$radius: 50px;
+$radius: 60px;
+$buttonMargin: 8px;
 
-html, body{
+html, body {
   margin: 0;
   font-family: Helvetica, sans-serif;
 }
 
-#root{
+#root {
   margin: 0;
   padding: 0;
   height: 100vh;
@@ -18,43 +19,58 @@ html, body{
   align-items: center;
 }
 
-#calculator{
+#calculator {
   width: 320px;
   height: 568px;
   background-color: $black;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
 
 
 }
 
-#display{
+#display {
   color: white;
+  width: 320px;
+  height: 190px;
 }
 
 
-.button{
+.button {
   width: $radius;
   height: $radius;
   border-radius: 50%;
   border: 0 solid black;
   font-size: 30px;
   font-weight: lighter;
-
+  user-select: none;
+  margin: $buttonMargin;
+  padding: 0;
 }
 
-.number-button{
+.number-button {
   @extend .button;
   background-color: $darkGrey;
   color: white;
 }
 
-.math-button{
+.math-button {
   @extend .button;
   background-color: $orange;
   color: white;
 }
 
-.utility-button{
+.utility-button {
   @extend .button;
   background-color: $lightGrey;
   color: black;
+}
+
+#zero {
+  @extend .number-button;
+  width: calc((#{$radius} * 2) + calc(#{$buttonMargin} * 2));
+  border-radius: 30px;
+  text-align: left;
+  padding-left: 18px;
 }
