@@ -1,2 +1,40 @@
+html, body {
+  margin: 0;
+  font-family: Helvetica, sans-serif; }
 
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjYWxjdWxhdG9yLmNzcyJ9 */
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+#calculator {
+  width: 320px;
+  height: 568px;
+  background-color: #1c1c1c; }
+
+#display {
+  color: white; }
+
+.button, .number-button, .math-button, .utility-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 0 solid black;
+  font-size: 30px;
+  font-weight: lighter; }
+
+.number-button {
+  background-color: #505050;
+  color: white; }
+
+.math-button {
+  background-color: #ff9500;
+  color: white; }
+
+.utility-button {
+  background-color: #d4d4d2;
+  color: black; }
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9zY3NzL2NhbGN1bGF0b3Iuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFNQTtFQUNFLFNBQVM7RUFDVCxrQ0FBa0MsRUFBQTs7QUFHcEM7RUFDRSxTQUFTO0VBQ1QsVUFBVTtFQUNWLGFBQWE7RUFDYixhQUFhO0VBQ2IsdUJBQXVCO0VBQ3ZCLG1CQUFtQixFQUFBOztBQUdyQjtFQUNFLFlBQVk7RUFDWixhQUFhO0VBQ2IseUJBdEJhLEVBQUE7O0FBMkJmO0VBQ0UsWUFBWSxFQUFBOztBQUlkO0VBQ0UsV0E5Qlc7RUErQlgsWUEvQlc7RUFnQ1gsa0JBQWtCO0VBQ2xCLHFCQUFxQjtFQUNyQixlQUFlO0VBQ2Ysb0JBQW9CLEVBQUE7O0FBSXRCO0VBRUUseUJBM0NnQjtFQTRDaEIsWUFBWSxFQUFBOztBQUdkO0VBRUUseUJBaERjO0VBaURkLFlBQVksRUFBQTs7QUFHZDtFQUVFLHlCQXpEaUI7RUEwRGpCLFlBQVksRUFBQSIsImZpbGUiOiJjYWxjdWxhdG9yLmNzcyJ9 */
