@@ -25,7 +25,8 @@ var Calculator = function (_React$Component) {
             lastInput: '',
             formula: '',
             action: '',
-            clearCount: 0
+            clearCount: 0,
+            firstTerm: ''
         };
         return _this;
     }
@@ -66,10 +67,21 @@ var Calculator = function (_React$Component) {
         }
     }, {
         key: 'add',
-        value: function add() {}
+        value: function add() {
+            this.setState({
+                firstTerm: this.state.displayText,
+                action: 'add'
+            });
+        }
     }, {
         key: 'calculate',
-        value: function calculate() {}
+        value: function calculate() {
+            switch (this.state.action) {
+                case 'add':
+                    this.setState({});
+
+            }
+        }
     }, {
         key: 'render',
         value: function render() {

@@ -14,7 +14,8 @@ class Calculator extends React.Component {
             lastInput: '',
             formula: '',
             action: '',
-            clearCount: 0
+            clearCount: 0,
+            firstTerm: ''
         };
     }
 
@@ -49,11 +50,21 @@ class Calculator extends React.Component {
     }
 
     add() {
-        
+        this.setState({
+            firstTerm: this.state.displayText,
+            action: 'add'
+        })
+
     }
 
     calculate() {
+        switch (this.state.action) {
+            case 'add':
+                this.setState({
 
+                })
+
+        }
     }
 
     render() {
