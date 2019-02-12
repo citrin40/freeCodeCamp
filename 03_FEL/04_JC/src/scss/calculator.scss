@@ -7,7 +7,7 @@ $buttonMargin: 8px;
 
 html, body {
   margin: 0;
-  font-family: Helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 #root {
@@ -20,20 +20,31 @@ html, body {
 }
 
 #calculator {
-  width: 320px;
+  width: 304px;
   height: 568px;
   background-color: $black;
   border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
-
-
+  padding: 10px 5px;
 }
 
 #display {
   color: white;
-  width: 320px;
+  width: 304px;
   height: 190px;
+  font-size: 75px;
+  position: relative;
+
+}
+
+#display span {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 5px 16.6px;
+  font-weight: 100;
+  line-height: 100%;
 }
 
 
@@ -47,6 +58,7 @@ html, body {
   user-select: none;
   margin: $buttonMargin;
   padding: 0;
+  outline: none;
 }
 
 .number-button {

@@ -14,36 +14,51 @@ var Calculator = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Calculator.__proto__ || Object.getPrototypeOf(Calculator)).call(this, props));
 
-        _this.state = {};
+        _this.pushButton = _this.pushButton.bind(_this);
+
+        _this.state = {
+            displayText: '0',
+            lastInput: '',
+            formula: ''
+        };
         return _this;
     }
 
     _createClass(Calculator, [{
-        key: "render",
+        key: 'pushButton',
+        value: function pushButton(e) {
+            var buttonValue = e.target.innerText;
+            this.setState({
+                displayText: buttonValue,
+                lastInput: buttonValue
+            });
+        }
+    }, {
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
-                { id: "calculator" },
-                React.createElement(Display, null),
-                React.createElement(Button, { className: "button utility-button", content: "AC" }),
-                React.createElement(Button, { className: "button utility-button", content: "+/-" }),
-                React.createElement(Button, { className: "button utility-button", content: "%" }),
-                React.createElement(Button, { className: "button math-button", content: "\xF7" }),
-                React.createElement(Button, { className: "button number-button", content: "7" }),
-                React.createElement(Button, { className: "button number-button", content: "8" }),
-                React.createElement(Button, { className: "button number-button", content: "9" }),
-                React.createElement(Button, { className: "button math-button", content: "x" }),
-                React.createElement(Button, { className: "button number-button", content: "4" }),
-                React.createElement(Button, { className: "button number-button", content: "5" }),
-                React.createElement(Button, { className: "button number-button", content: "6" }),
-                React.createElement(Button, { className: "button math-button", content: "-" }),
-                React.createElement(Button, { className: "button number-button", content: "1" }),
-                React.createElement(Button, { className: "button number-button", content: "2" }),
-                React.createElement(Button, { className: "button number-button", content: "3" }),
-                React.createElement(Button, { className: "button math-button", content: "+" }),
-                React.createElement(Button, { id: "zero", className: "button", content: "0" }),
-                React.createElement(Button, { className: "button number-button", content: "." }),
-                React.createElement(Button, { className: "button math-button", content: "=" })
+                'div',
+                { id: 'calculator' },
+                React.createElement(Display, { text: this.state.displayText }),
+                React.createElement(Button, { className: 'button utility-button', content: this.state.lastInput === '' ? 'AC' : 'C', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button utility-button', content: '+/-', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button utility-button', content: '%', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button math-button', content: '\xF7', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button number-button', content: '7', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button number-button', content: '8', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button number-button', content: '9', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button math-button', content: 'x', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button number-button', content: '4', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button number-button', content: '5', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button number-button', content: '6', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button math-button', content: '-', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button number-button', content: '1', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button number-button', content: '2', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button number-button', content: '3', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button math-button', content: '+', pushButton: this.pushButton }),
+                React.createElement(Button, { id: 'zero', className: 'button', content: '0', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button number-button', content: '.', pushButton: this.pushButton }),
+                React.createElement(Button, { className: 'button math-button', content: '=', pushButton: this.pushButton })
             );
         }
     }]);
@@ -61,12 +76,16 @@ var Display = function (_React$Component2) {
     }
 
     _createClass(Display, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
-                { id: "display" },
-                "Display"
+                'div',
+                { id: 'display' },
+                React.createElement(
+                    'span',
+                    null,
+                    this.props.text
+                )
             );
         }
     }]);
@@ -84,11 +103,15 @@ var Button = function (_React$Component3) {
     }
 
     _createClass(Button, [{
-        key: "render",
+        key: 'render',
         value: function render() {
+            var _this4 = this;
+
             return React.createElement(
-                "button",
-                { className: this.props.className, id: this.props.id },
+                'button',
+                { className: this.props.className, id: this.props.id, onClick: function onClick(e) {
+                        return _this4.props.pushButton(e);
+                    }, value: this.props.content },
                 this.props.content
             );
         }
