@@ -22,7 +22,8 @@ var Calculator = function (_React$Component) {
                 displayText: newText,
                 lastInput: buttonValue,
                 formula: _this.state.formula + buttonValue,
-                overwrite: false
+                overwrite: false,
+                clearCount: 0
             });
         };
 
@@ -70,12 +71,17 @@ var Calculator = function (_React$Component) {
         };
 
         _this.operator = function (e) {
-            var actionText = e.target.innerText;
-            _this.setState({
-                firstTerm: Number(_this.state.displayText),
-                action: actionText,
-                overwrite: true
-            });
+            if (_this.state.action && typeof _this.state.lastInput === 'number') {
+                _this.calculate();
+            } else {
+                var actionText = e.target.innerText;
+                _this.setState({
+                    firstTerm: Number(_this.state.displayText),
+                    action: actionText,
+                    overwrite: true,
+                    lastInput: actionText
+                });
+            }
         };
 
         _this.calculate = function () {
@@ -123,26 +129,26 @@ var Calculator = function (_React$Component) {
                 'div',
                 { id: 'calculator' },
                 React.createElement(Display, { text: this.state.displayText }),
-                React.createElement(Button, { className: 'button utility-button', content: this.state.lastInput === '' ? 'AC' : 'C',
+                React.createElement(Button, { id: 'clear', className: 'button utility-button', content: this.state.lastInput === '' ? 'AC' : 'C',
                     pushButton: this.clear }),
                 React.createElement(Button, { className: 'button utility-button', content: '+/-', pushButton: this.negate }),
                 React.createElement(Button, { className: 'button utility-button', content: '%', pushButton: this.percentify }),
-                React.createElement(Button, { className: 'button math-button', content: '\xF7', pushButton: this.operator }),
-                React.createElement(Button, { className: 'button number-button', content: '7', pushButton: this.enterNum }),
-                React.createElement(Button, { className: 'button number-button', content: '8', pushButton: this.enterNum }),
-                React.createElement(Button, { className: 'button number-button', content: '9', pushButton: this.enterNum }),
-                React.createElement(Button, { className: 'button math-button', content: 'x', pushButton: this.operator }),
-                React.createElement(Button, { className: 'button number-button', content: '4', pushButton: this.enterNum }),
-                React.createElement(Button, { className: 'button number-button', content: '5', pushButton: this.enterNum }),
-                React.createElement(Button, { className: 'button number-button', content: '6', pushButton: this.enterNum }),
-                React.createElement(Button, { className: 'button math-button', content: '-', pushButton: this.operator }),
-                React.createElement(Button, { className: 'button number-button', content: '1', pushButton: this.enterNum }),
-                React.createElement(Button, { className: 'button number-button', content: '2', pushButton: this.enterNum }),
-                React.createElement(Button, { className: 'button number-button', content: '3', pushButton: this.enterNum }),
-                React.createElement(Button, { className: 'button math-button', content: '+', pushButton: this.operator }),
+                React.createElement(Button, { id: 'divide', className: 'button math-button', content: '\xF7', pushButton: this.operator }),
+                React.createElement(Button, { id: 'seven', className: 'button number-button', content: '7', pushButton: this.enterNum }),
+                React.createElement(Button, { id: 'eight', className: 'button number-button', content: '8', pushButton: this.enterNum }),
+                React.createElement(Button, { id: 'nine', className: 'button number-button', content: '9', pushButton: this.enterNum }),
+                React.createElement(Button, { id: 'multiply', className: 'button math-button', content: 'x', pushButton: this.operator }),
+                React.createElement(Button, { id: 'four', className: 'button number-button', content: '4', pushButton: this.enterNum }),
+                React.createElement(Button, { id: 'five', className: 'button number-button', content: '5', pushButton: this.enterNum }),
+                React.createElement(Button, { id: 'six', className: 'button number-button', content: '6', pushButton: this.enterNum }),
+                React.createElement(Button, { id: 'subtract', className: 'button math-button', content: '-', pushButton: this.operator }),
+                React.createElement(Button, { id: 'one', className: 'button number-button', content: '1', pushButton: this.enterNum }),
+                React.createElement(Button, { id: 'two', className: 'button number-button', content: '2', pushButton: this.enterNum }),
+                React.createElement(Button, { id: 'three', className: 'button number-button', content: '3', pushButton: this.enterNum }),
+                React.createElement(Button, { id: 'plus', className: 'button math-button', content: '+', pushButton: this.operator }),
                 React.createElement(Button, { id: 'zero', className: 'button', content: '0', pushButton: this.enterNum }),
-                React.createElement(Button, { className: 'button number-button', content: '.', pushButton: this.decimalPoint }),
-                React.createElement(Button, { className: 'button math-button', content: '=', pushButton: this.calculate })
+                React.createElement(Button, { id: 'decimal', className: 'button number-button', content: '.', pushButton: this.decimalPoint }),
+                React.createElement(Button, { id: 'equals', className: 'button math-button', content: '=', pushButton: this.calculate })
             );
         }
     }]);

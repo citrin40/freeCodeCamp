@@ -13,7 +13,7 @@ class Calculator extends React.Component {
         };
     }
 
-    enterNum = (e)  => {
+    enterNum = (e) => {
         const buttonValue = e.target.innerText;
         let newText = (!this.state.overwrite) ? Number(this.state.displayText + buttonValue) : buttonValue;
 
@@ -21,16 +21,17 @@ class Calculator extends React.Component {
             displayText: newText,
             lastInput: buttonValue,
             formula: this.state.formula + buttonValue,
-            overwrite: false
+            overwrite: false,
+            clearCount: 0
         });
     };
 
     clear = () => {
-        switch(this.state.clearCount){
+        switch (this.state.clearCount) {
             case 0:
                 this.setState({
                     displayText: 0,
-                    clearCount: this.state.clearCount +1
+                    clearCount: this.state.clearCount + 1
                 });
                 break;
             case 1:
@@ -69,12 +70,17 @@ class Calculator extends React.Component {
     };
 
     operator = (e) => {
-        const actionText = e.target.innerText;
-        this.setState({
-            firstTerm: Number(this.state.displayText),
-            action: actionText,
-            overwrite: true
-        });
+        if(this.state.action && (typeof this.state.lastInput === 'number')) {
+            this.calculate();
+        } else {
+            const actionText = e.target.innerText;
+            this.setState({
+                firstTerm: Number(this.state.displayText),
+                action: actionText,
+                overwrite: true,
+                lastInput: actionText
+            });
+        }
     };
 
     calculate = () => {
@@ -108,26 +114,26 @@ class Calculator extends React.Component {
         return (
             <div id="calculator">
                 <Display text={this.state.displayText}/>
-                <Button className="button utility-button" content={this.state.lastInput === '' ? 'AC' : 'C'}
+                <Button id="clear" className="button utility-button" content={this.state.lastInput === '' ? 'AC' : 'C'}
                         pushButton={this.clear}/>
                 <Button className="button utility-button" content="+/-" pushButton={this.negate}/>
                 <Button className="button utility-button" content="%" pushButton={this.percentify}/>
-                <Button className="button math-button" content="÷" pushButton={this.operator}/>
-                <Button className="button number-button" content="7" pushButton={this.enterNum}/>
-                <Button className="button number-button" content="8" pushButton={this.enterNum}/>
-                <Button className="button number-button" content="9" pushButton={this.enterNum}/>
-                <Button className="button math-button" content="x" pushButton={this.operator}/>
-                <Button className="button number-button" content="4" pushButton={this.enterNum}/>
-                <Button className="button number-button" content="5" pushButton={this.enterNum}/>
-                <Button className="button number-button" content="6" pushButton={this.enterNum}/>
-                <Button className="button math-button" content="-" pushButton={this.operator}/>
-                <Button className="button number-button" content="1" pushButton={this.enterNum}/>
-                <Button className="button number-button" content="2" pushButton={this.enterNum}/>
-                <Button className="button number-button" content="3" pushButton={this.enterNum}/>
-                <Button className="button math-button" content="+" pushButton={this.operator}/>
+                <Button id="divide" className="button math-button" content="÷" pushButton={this.operator}/>
+                <Button id="seven" className="button number-button" content="7" pushButton={this.enterNum}/>
+                <Button id="eight" className="button number-button" content="8" pushButton={this.enterNum}/>
+                <Button id="nine" className="button number-button" content="9" pushButton={this.enterNum}/>
+                <Button id="multiply" className="button math-button" content="x" pushButton={this.operator}/>
+                <Button id="four" className="button number-button" content="4" pushButton={this.enterNum}/>
+                <Button id="five" className="button number-button" content="5" pushButton={this.enterNum}/>
+                <Button id="six" className="button number-button" content="6" pushButton={this.enterNum}/>
+                <Button id="subtract" className="button math-button" content="-" pushButton={this.operator}/>
+                <Button id="one" className="button number-button" content="1" pushButton={this.enterNum}/>
+                <Button id="two" className="button number-button" content="2" pushButton={this.enterNum}/>
+                <Button id="three" className="button number-button" content="3" pushButton={this.enterNum}/>
+                <Button id="plus" className="button math-button" content="+" pushButton={this.operator}/>
                 <Button id="zero" className="button" content="0" pushButton={this.enterNum}/>
-                <Button className="button number-button" content="." pushButton={this.decimalPoint}/>
-                <Button className="button math-button" content="=" pushButton={this.calculate}/>
+                <Button id="decimal" className="button number-button" content="." pushButton={this.decimalPoint}/>
+                <Button id="equals" className="button math-button" content="=" pushButton={this.calculate}/>
             </div>
         )
     }
