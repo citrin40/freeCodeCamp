@@ -1,0 +1,28 @@
+html, body{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Montserrat', sans-serif;
+    padding: 5px 15px;
+}
+
+.project-area{
+    font-size: 125%;
+    font-weight: bold;
+}
+
+
+
+table, td, th {
+    border-top: 1px solid black;
+    border-collapse: collapse;
+}
+#first-row, table{
+    border-top: 0;
+}
+
+td,th {
+    padding: 8px 15px;
+    text-align: left;
+}

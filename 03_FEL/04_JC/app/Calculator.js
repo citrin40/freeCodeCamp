@@ -45,7 +45,6 @@ var Calculator = function (_React$Component) {
                         overwrite: true
                     });
                     break;
-
             }
         };
 
@@ -71,20 +70,18 @@ var Calculator = function (_React$Component) {
         };
 
         _this.operator = function (e) {
-            if (_this.state.action && typeof _this.state.lastInput === 'number') {
-                _this.calculate();
-            } else {
-                var actionText = e.target.innerText;
-                _this.setState({
-                    firstTerm: Number(_this.state.displayText),
-                    action: actionText,
-                    overwrite: true,
-                    lastInput: actionText
-                });
-            }
+
+            var actionText = e.target.innerText;
+            _this.setState({
+                firstTerm: Number(_this.state.displayText),
+                action: actionText,
+                overwrite: true,
+                lastInput: actionText
+            });
         };
 
         _this.calculate = function () {
+
             switch (_this.state.action) {
                 case '+':
                     _this.setState({
@@ -103,11 +100,11 @@ var Calculator = function (_React$Component) {
                     break;
                 case '÷':
                     _this.setState({
-                        displayText: _this.state.firstTerm / Number(_this.state.displayText)
+                        displayText: (_this.state.firstTerm / Number(_this.state.displayText)).to
                     });
                     break;
                 default:
-                    console.log('calculated');
+                    break;
             }
         };
 

@@ -44,7 +44,6 @@ class Calculator extends React.Component {
                     overwrite: true
                 });
                 break;
-
         }
     };
 
@@ -70,9 +69,7 @@ class Calculator extends React.Component {
     };
 
     operator = (e) => {
-        if(this.state.action && (typeof this.state.lastInput === 'number')) {
-            this.calculate();
-        } else {
+
             const actionText = e.target.innerText;
             this.setState({
                 firstTerm: Number(this.state.displayText),
@@ -80,10 +77,12 @@ class Calculator extends React.Component {
                 overwrite: true,
                 lastInput: actionText
             });
-        }
+
     };
 
     calculate = () => {
+
+
         switch (this.state.action) {
             case '+':
                 this.setState({
@@ -102,11 +101,11 @@ class Calculator extends React.Component {
                 break;
             case '÷':
                 this.setState({
-                    displayText: this.state.firstTerm / Number(this.state.displayText)
+                    displayText: (this.state.firstTerm / Number(this.state.displayText)).to
                 });
                 break;
             default:
-                console.log('calculated');
+                break;
         }
     };
 
